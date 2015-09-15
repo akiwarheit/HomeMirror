@@ -32,10 +32,10 @@ public class VoiceRecognitionService extends Service implements RecognitionListe
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Intent recognitionIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getString(R.string.voice_recognition_extra_package));
-        intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 5);
+        Intent recognitionIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH); // Not to mistake it as the intent that called this service (MirrorActivity)
+        recognitionIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        recognitionIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getString(R.string.voice_recognition_extra_package));
+        recognitionIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 5);
         speechRecognizer.startListening(recognitionIntent);
 
         return super.onStartCommand(intent, flags, startId);
@@ -45,11 +45,12 @@ public class VoiceRecognitionService extends Service implements RecognitionListe
     public void onDestroy() {
         super.onDestroy();
         this.speechRecognizer.stopListening();
+        this.speechRecognizer.destroy();
     }
 
     @Override
     public void onReadyForSpeech(Bundle params) {
-        Log.i("onReadyForSpeech", "onReadyForSpeech");
+        Log.i("VoiceRecognition", "onReadyForSpeech");
     }
 
     @Override
