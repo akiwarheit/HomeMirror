@@ -18,6 +18,7 @@ import com.morristaedt.mirror.modules.ForecastModule;
 import com.morristaedt.mirror.modules.XKCDModule;
 import com.morristaedt.mirror.modules.YahooFinanceModule;
 import com.morristaedt.mirror.requests.YahooStockResponse;
+import com.morristaedt.mirror.service.VoiceRecognitionService;
 import com.morristaedt.mirror.utils.WeekUtil;
 import com.squareup.picasso.Picasso;
 
@@ -111,6 +112,8 @@ public class MirrorActivity extends ActionBarActivity {
 //        mXKCDImage.setColorFilter(colorFilterNegative); // not inverting for now
 
         setViewState();
+
+        startService(new Intent(this, VoiceRecognitionService.class));
     }
 
     @Override

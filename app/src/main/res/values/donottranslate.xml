@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="voice_recognition_extra_package">com.morristaedt.mirror.VOICE_RECOGNITION</string>
+
+</resources>
